@@ -12,20 +12,26 @@ export class RecipeService {
   RecipeSelected = new Subject<Recipe>();
   RecipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'first recipe',
-       'first is enjera',
-        'https://www.researchgate.net/profile/Tadesse-Teferra/publication/279329687/figure/fig5/AS:669982325235725@1536747642549/7-Ethiopian-traditional-a-plate-with-the-different-food-groups.ppm'
-        ,[new Ingredient('cheese', 12), new Ingredient('onion', 4)]),
-    new Recipe(
-      'second recipe',
-       'second is meat',
-        'https://www.researchgate.net/profile/Tadesse-Teferra/publication/279329687/figure/fig5/AS:669982325235725@1536747642549/7-Ethiopian-traditional-a-plate-with-the-different-food-groups.ppm',
-        [new Ingredient("tomato", 8), new Ingredient('butter', 2)])
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'first recipe',
+  //      'first is enjera',
+  //       'https://www.researchgate.net/profile/Tadesse-Teferra/publication/279329687/figure/fig5/AS:669982325235725@1536747642549/7-Ethiopian-traditional-a-plate-with-the-different-food-groups.ppm'
+  //       ,[new Ingredient('cheese', 12), new Ingredient('onion', 4)]),
+  //   new Recipe(
+  //     'second recipe',
+  //      'second is meat',
+  //       'https://www.researchgate.net/profile/Tadesse-Teferra/publication/279329687/figure/fig5/AS:669982325235725@1536747642549/7-Ethiopian-traditional-a-plate-with-the-different-food-groups.ppm',
+  //       [new Ingredient("tomato", 8), new Ingredient('butter', 2)])
+  // ];
+  private recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.RecipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
